@@ -1,0 +1,161 @@
+{% extends 'crm/base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Dashboard</h2>
+    
+    <div class="row mb-4">
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card bg-light shadow-sm h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-user-friends fa-2x mb-2 text-primary"></i>
+                    <h5 class="card-title">Total Leads</h5>
+                    <p class="card-text display-4">{{ total_leads }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card bg-light shadow-sm h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-user-check fa-2x mb-2 text-success"></i>
+                    <h5 class="card-title">Total Clients</h5>
+                    <p class="card-text display-4">{{ total_clients }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card bg-light shadow-sm h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-tasks fa-2x mb-2 text-warning"></i>
+                    <h5 class="card-title">Pending Tasks</h5>
+                    <p class="card-text display-4">{{ pending_tasks }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card bg-light shadow-sm h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-check-circle fa-2x mb-2 text-info"></i>
+                    <h5 class="card-title">Completed Tasks</h5>
+                    <p class="card-text display-4">{{ completed_tasks }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Chart Section -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            {{ pie_chart|safe }}
+        </div>
+    </div>
+
+    <!-- Recent Items -->
+    <div class="row">
+        {% if role == 'admin' or role == 'sales' %}
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    Recent Leads
+                </div>
+                <div class="card-body">
+                    {% if recent_leads %}
+                    <ul class="list-group">
+                        {% for lead in recent_leads %}
+                        <li class="list-group-item list-group-item-action">{{ lead.name }} - {{ lead.created_at|date:"M d, Y" }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No recent leads available.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    Recent Clients
+                </div>
+                <div class="card-body">
+                    {% if recent_clients %}
+                    <ul class="list-group">
+                        {% for client in recent_clients %}
+                        <li class="list-group-item list-group-item-action">{{ client.name }} - {{ client.joined_at|date:"M d, Y" }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No recent clients available.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    {% if role == 'support' %}
+                        Your Recent Tasks
+                    {% else %}
+                        Recently Assigned Tasks
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    {% if recent_tasks %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Task</th>
+                                <th>Status</th>
+                                <th>Due Date</th>
+                                {% if role != 'support' %}
+                                    <th>Assigned To</th>
+                                {% endif %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for task in recent_tasks %}
+                            <tr>
+                                <td>{{ task.title }}</td>
+                                <td>
+                                    <span class="badge {% if task.status == 'completed' %}badge-success{% else %}badge-warning{% endif %}">
+                                        {{ task.status }}
+                                    </span>
+                                </td>
+                                <td>{{ task.due_date|date:"M d, Y" }}</td>
+                                {% if role != 'support' %}
+                                    <td>{{ task.assigned_to.username }}</td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <p>No tasks available.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .card {
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: scale(1.02);
+        }
+        .list-group-item-action:hover {
+            background-color: #f1f1f1;
+        }
+        .badge-success {
+            background-color: #28a745;
+        }
+        .badge-warning {
+            background-color: #ffc107;
+        }
+    </style>
+</div>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends 'crm/base.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="mb-0"><i class="bi bi-person-plus-fill me-2"></i>Lead List</h3>
+    <a href="{% url 'add_lead' %}" class="btn btn-success"><i class="bi bi-plus-circle me-2"></i>Add New Lead</a>
+</div>
+
+<div class="mb-3">
+    <input type="text" id="searchInput" class="form-control" placeholder="Search leads...">
+</div>
+
+{% if leads %}
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered" id="leadTable">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Status</th>
+                <th>Created At</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lead in leads %}
+            <tr>
+                <td>{{ lead.name }}</td>
+                <td>{{ lead.email }}</td>
+                <td>{{ lead.phone }}</td>
+                <td>
+                    <span class="badge rounded-pill 
+                        {% if lead.status == 'new' %}bg-primary
+                        {% elif lead.status == 'contacted' %}bg-info
+                        {% elif lead.status == 'converted' %}bg-success
+                        {% else %}bg-secondary{% endif %}">
+                        {{ lead.status|title }}
+                    </span>
+                </td>
+                <td>{{ lead.created_at|date:"d M Y H:i" }}</td>
+                <td class="text-center">
+                    <a href="{% url 'edit_lead' lead.id %}" class="btn btn-sm btn-warning me-1" title="Edit Lead"><i class="bi bi-pencil-square"></i></a>
+                    {% if request.session.role == 'admin' %}
+                        <a href="{% url 'delete_lead' lead.id %}" class="btn btn-sm btn-danger me-1" title="Delete Lead"
+                        onclick="return confirm('Are you sure you want to delete this lead?')"><i class="bi bi-trash"></i></a>
+                    {% endif %}
+                    {% if request.session.role in 'admin sales' %}
+                        <a href="{% url 'convert_lead' lead.id %}" class="btn btn-sm btn-success" title="Convert to Client"
+                        onclick="return confirm('Are you sure you want to convert this lead to a client?')"><i class="bi bi-arrow-right-circle"></i> Convert</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+    <div class="alert alert-info text-center" role="alert">
+        <i class="bi bi-info-circle-fill me-2"></i>No leads found. Start by adding a new lead!
+    </div>
+{% endif %}
+<script>
+function searchLeads() {
+    var input, filter, table, tr, td, i, j, txtValue;
+    input = document.getElementById("searchInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("leadTable");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 1; i < tr.length; i++) { // Start from 1 to skip the header row
+        var display = "none";
+        td = tr[i].getElementsByTagName("td");
+        for (j = 0; j < td.length; j++) {
+            if (td[j]) {
+                txtValue = td[j].textContent || td[j].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    display = "";
+                    break;
+                }
+            }
+        }
+        tr[i].style.display = display;
+    }
+}
+
+document.getElementById("searchInput").addEventListener("keyup", searchLeads);
+</script>
+<style>
+    .badge {
+        font-size: 0.85em;
+        padding: 0.35em 0.65em;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    .badge.rounded-pill {
+        border-radius: 50rem;
+    }
+    .bg-primary {
+        background-color: #007bff !important;
+    }
+    .bg-info {
+        background-color: #17a2b8 !important;
+        color: #fff !important;
+    }
+    .bg-success {
+        background-color: #28a745 !important;
+    }
+    .bg-secondary {
+        background-color: #6c757d !important;
+    }
+</style>
+
+{% endblock %}

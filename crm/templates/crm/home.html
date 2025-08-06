@@ -1,0 +1,12 @@
+    {% extends 'crm/base.html' %}
+
+    {% block content %}
+    <div class="jumbotron jumbotron-fluid bg-light p-5 rounded-3 text-center">
+        <h1 class="display-4">Welcome to Your CRM System!</h1>
+        <p class="lead">Manage your leads, clients, and tasks efficiently.</p>
+        <hr class="my-4">
+        <p>Login to access your dashboard and start managing your customer relationships.</p>
+        <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button"><i class="bi bi-box-arrow-in-right me-2"></i>Login Now</a>
+    </div>
+    {% endblock %}
+    
