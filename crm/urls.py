@@ -29,5 +29,6 @@ urlpatterns = [
     path('dashboard/', dashboard, name='dashboard'),
     path('task/<int:task_id>/toggle-status/', toggle_task_status, name='toggle_task_status'),
     path('tasks/edit/<int:task_id>/', views.edit_task, name='edit_task'),
+    path('tasks/delete/<int:task_id>/', views.delete_task, name='delete_task'),
     # path('toggle-task-status-in-list/<int:task_id>/', views.toggle_task_status_in_list, name='toggle_task_status_in_list'),
 ]

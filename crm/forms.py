@@ -16,7 +16,7 @@ class LeadForm(forms.ModelForm):
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['title', 'description', 'due_date', 'status', 'assigned_to']
+        fields = ['title', 'description', 'client', 'assigned_to', 'due_date', 'status']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),

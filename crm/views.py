@@ -245,6 +245,17 @@ def edit_task(request, task_id):
         form = TaskForm(instance=task)
 
     return render(request, 'crm/task_form.html', {'form': form, 'title': 'Edit Task'})
+
+def delete_task(request, task_id):
+    if 'user_id' not in request.session or request.session['role'] not in ['admin', 'sales']:
+        messages.error(request, "You don't have permission to delete tasks.")
+        return redirect('task_list')
+
+    task = get_object_or_404(Task, id=task_id)
+    task.delete()
+    messages.success(request, "Task deleted successfully.")
+    return redirect('task_list')
+    
 def home(request):
     if 'user_id' not in request.session:
         return redirect('login')
