@@ -258,5 +258,7 @@ def delete_task(request, task_id):
     
 def home(request):
     if 'user_id' not in request.session:
-        return redirect('login')
-    return render(request,'crm/home.html')
+        return render(request, 'crm/index.html')
+
+    return redirect('dashboard')   # ✅ Correct
+

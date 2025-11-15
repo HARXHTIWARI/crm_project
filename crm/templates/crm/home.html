@@ -1,12 +1,94 @@
-    {% extends 'crm/base.html' %}
+{% extends 'crm/base.html' %}
+<!-- 
+CRM LANDING PAGE TEMPLATE
+=========================
+This is the public-facing home page that serves as the entry point
+for unauthenticated users. It provides a welcoming interface and
+directs users to the login page to access the CRM system.
+-->
 
-    {% block content %}
-    <div class="jumbotron jumbotron-fluid bg-light p-5 rounded-3 text-center">
-        <h1 class="display-4">Welcome to Your CRM System!</h1>
-        <p class="lead">Manage your leads, clients, and tasks efficiently.</p>
-        <hr class="my-4">
-        <p>Login to access your dashboard and start managing your customer relationships.</p>
-        <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button"><i class="bi bi-box-arrow-in-right me-2"></i>Login Now</a>
-    </div>
-    {% endblock %}
+{% block content %}
+<!-- 
+HERO/JUMBOTRON SECTION
+======================
+Fluid container with prominent call-to-action and system introduction.
+Uses Bootstrap's jumbotron-like styling for visual impact.
+-->
+
+<div class="jumbotron jumbotron-fluid bg-light p-5 rounded-3 text-center">
+    <!-- 
+    Jumbotron Styling Classes:
+    - jumbotron jumbotron-fluid: Bootstrap 5 jumbotron replacement (fluid width)
+    - bg-light: Light background color for clean, professional appearance
+    - p-5: Padding of 5 units (3rem) on all sides for spacious layout
+    - rounded-3: Medium border radius for modern, softened corners
+    - text-center: Centers all text content horizontally
+    -->
     
+    <!-- MAIN HEADLINE -->
+    <h1 class="display-4">Welcome to Your CRM System!</h1>
+    <!-- 
+    Typography Classes:
+    - display-4: Large, prominent display heading (Bootstrap display heading)
+    - Size: Approximately 3.5rem (56px) - much larger than normal headings
+    - Purpose: Grabs immediate attention and communicates primary value
+    -->
+    
+    <!-- SUBHEADLINE / VALUE PROPOSITION -->
+    <p class="lead">Manage your leads, clients, and tasks efficiently.</p>
+    <!-- 
+    Lead Paragraph:
+    - lead: Bootstrap class that makes paragraph text larger and lighter
+    - Font size: Approximately 1.25rem (20px) with higher line height
+    - Purpose: Elaborates on the headline with specific system capabilities
+    - Content: Highlights three core CRM functions (leads, clients, tasks)
+    -->
+    
+    <!-- VISUAL SEPARATOR -->
+    <hr class="my-4">
+    <!-- 
+    Horizontal Rule Styling:
+    - hr: Thematic break between headline section and call-to-action
+    - my-4: Vertical margin of 4 units (1.5rem) above and below the line
+    - Purpose: Creates visual separation between different content sections
+    -->
+    
+    <!-- SUPPORTING DESCRIPTION -->
+    <p>Login to access your dashboard and start managing your customer relationships.</p>
+    <!-- 
+    Action-Oriented Text:
+    - Clear instruction for what the user should do next
+    - Emphasizes the dashboard as the main entry point after login
+    - Reinforces the CRM purpose (customer relationship management)
+    -->
+    
+    <!-- PRIMARY CALL-TO-ACTION BUTTON -->
+    <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">
+        <i class="bi bi-box-arrow-in-right me-2"></i>Login Now
+    </a>
+    <!-- 
+    Button Styling and Components:
+    
+    Button Classes:
+    - btn: Base button styling
+    - btn-primary: Primary brand color (typically blue)
+    - btn-lg: Large button size for prominence and easy clicking
+    
+    Icon Integration:
+    - bi bi-box-arrow-in-right: Bootstrap Icons "enter" symbol
+    - me-2: Margin end of 2 units (0.5rem) for spacing between icon and text
+    - Visual Purpose: Universal symbol for login/entry action
+    
+    Link Attributes:
+    - href="{% url 'login' %}": Django URL reversal to login page
+    - role="button": Accessibility attribute identifying it as a button
+    
+    Text Content:
+    - "Login Now": Action-oriented, imperative text
+    - Clear, concise instruction for user action
+    -->
+</div>
+<!-- END JUMBOTRON SECTION -->
+
+{% endblock %}
+<!-- END CONTENT BLOCK -->

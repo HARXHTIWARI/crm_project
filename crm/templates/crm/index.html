@@ -1,0 +1,211 @@
+{% extends 'crm/base.html' %}
+
+{% block content %}
+
+<!-- CUSTOM SAAS STYLING -->
+<style>
+    body {
+        background: #f8f9fc;
+    }
+
+    .hero {
+        background: linear-gradient(135deg, #ff6b6b, #f06595);
+        color: white;
+        padding: 90px 30px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+        font-weight: 700;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+    }
+
+    .feature-card {
+        border-radius: 16px;
+        transition: 0.3s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    }
+
+    .pricing-card {
+        border-radius: 18px;
+        transition: 0.3s ease;
+    }
+
+    .pricing-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+    }
+
+    /* footer {
+        background: #212529;
+        color: white;
+        padding: 50px 20px;
+        margin-top: 60px;
+    } */
+
+    footer h5 {
+        font-weight: 600;
+    }
+
+    footer a {
+        color: #f8f9fa;
+        text-decoration: none;
+    }
+
+    footer a:hover {
+        color: #ffc107;
+        text-decoration: underline;
+    }
+</style>
+
+<div class="container py-5">
+
+    <!-- HERO SECTION -->
+    <div class="hero mb-5">
+        <h1>Atomic CRM – Smart, Simple & Secure</h1>
+        <p class="mt-3">
+            A private CRM designed for internal company use. Manage leads, clients & tasks effortlessly.
+        </p>
+
+        <div class="mt-4">
+            <a href="{% url 'login' %}" class="btn btn-light btn-lg px-4 py-2 fw-bold me-2">
+                Login
+            </a>
+            <a href="mailto:harsh.tiwari5423@gmail.com"
+               class="btn btn-outline-light btn-lg px-4 py-2 fw-bold">
+                Contact Us
+            </a>
+        </div>
+    </div>
+
+    <!-- FEATURES -->
+    <h2 class="text-center fw-bold mb-4">Why Choose Atomic CRM?</h2>
+    <div class="row mb-5">
+
+        <div class="col-md-4 mb-4">
+            <div class="card feature-card p-4 text-center shadow-sm">
+                <i class="bi bi-people-fill text-primary display-5 mb-3"></i>
+                <h5 class="fw-bold">Lead Management</h5>
+                <p class="text-muted">Organize leads, follow-ups & conversion pipelines easily.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card feature-card p-4 text-center shadow-sm">
+                <i class="bi bi-briefcase-fill text-success display-5 mb-3"></i>
+                <h5 class="fw-bold">Client Database</h5>
+                <p class="text-muted">Store client details securely & track communication.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card feature-card p-4 text-center shadow-sm">
+                <i class="bi bi-check2-circle text-warning display-5 mb-3"></i>
+                <h5 class="fw-bold">Task Tracking</h5>
+                <p class="text-muted">Assign tasks to team members & monitor progress easily.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRICING -->
+    <h2 class="text-center fw-bold mb-4">Pricing Plans</h2>
+    <div class="row justify-content-center">
+
+        <div class="col-md-4 mb-4">
+            <div class="card pricing-card p-4 text-center border-0 shadow-sm">
+                <h4 class="fw-bold">3-Month Plan</h4>
+                <h2 class="fw-bold text-primary mt-3 mb-3">₹499/mo</h2>
+                <p class="text-muted">Billed every 3 months</p>
+                <a href="mailto:harsh.tiwari5423@gmail.com?subject=Subscribe 3-Month Plan"
+                   class="btn btn-primary btn-lg w-100">
+                    Subscribe Now
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card pricing-card p-4 text-center border-0 shadow-sm">
+                <h4 class="fw-bold">6-Month Plan</h4>
+                <h2 class="fw-bold text-success mt-3 mb-3">₹399/mo</h2>
+                <p class="text-muted">Best value for teams</p>
+                <a href="mailto:harsh.tiwari5423@gmail.com?subject=Subscribe 6-Month Plan"
+                   class="btn btn-success btn-lg w-100">
+                    Subscribe Now
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card pricing-card p-4 text-center border-0 shadow-sm">
+                <h4 class="fw-bold">Yearly Plan</h4>
+                <h2 class="fw-bold text-danger mt-3 mb-3">₹299/mo</h2>
+                <p class="text-muted">Billed annually</p>
+                <a href="mailto:harsh.tiwari5423@gmail.com?subject=Subscribe Yearly Plan"
+                   class="btn btn-danger btn-lg w-100">
+                    Subscribe Now
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FULL-WIDTH FOOTER -->
+<footer class="mt-5 w-100" style="background:#202020; color:white; padding:60px 20px 30px 20px;">
+
+    <div class="container-fluid px-5">
+
+        <div class="row">
+
+            <!-- ABOUT -->
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold">Atomic CRM</h5>
+                <p class="text-light small">
+                    A private CRM platform crafted for internal company operations.
+                </p>
+            </div>
+
+            <!-- TEST LOGIN ACCOUNTS -->
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold">Test Login Accounts</h5>
+                <ul class="list-unstyled small">
+                    <li><strong>Admin:</strong> admin_raj / admin_raj@1</li>
+                    <li><strong>Sales:</strong> sales_amit / sale</li>
+                    <li><strong>Support:</strong> support_neha / support</li>
+                </ul>
+            </div>
+
+            <!-- CONTACT -->
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold">Contact Us</h5>
+                <p class="small text-light">For business inquiries, plans, or demo access:</p>
+                <a href="mailto:harsh.tiwari5423@gmail.com" class="btn btn-warning fw-bold btn-sm">
+                    Email Us
+                </a>
+            </div>
+
+        </div>
+
+        <hr style="border-color:#0f0909;">
+
+        <p class="text-center small text-secondary mb-0">
+            © 2025 Atomic CRM — All Rights Reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+{% endblock %}
